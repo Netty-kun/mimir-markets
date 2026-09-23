@@ -121,6 +121,7 @@ export const FEATURES = [
   "virtual_baskets",
   "agent_baskets",
   "fee_policy",
+  "dependency_health",
 ] as const;
 export type Feature = (typeof FEATURES)[number];
 
@@ -152,6 +153,9 @@ const FEATURE_DEFAULTS: Record<Feature, boolean> = {
   // independent audit yet (see docs/LAUNCH_GATE_STATUS.md). Turning this on before
   // that gate closes would charge fees against an escrow nobody has reviewed.
   fee_policy: false,
+  // Dependency health categories are privacy-safe read paths, but require
+  // explicit contract-first validation before exposing to external consumers.
+  dependency_health: false,
 };
 
 function featureEnvKey(feature: Feature): string {
